@@ -6,6 +6,7 @@ import CardExpiry from './CardExpiry'
 import CardCvc from './CardCvc'
 import CardNumber from './CardNumber'
 import PostalCode from './PostalCode'
+import PaymentRequestButton from './PaymentRequestButton'
 
 module.exports = {
   Card,
@@ -13,6 +14,7 @@ module.exports = {
   CardExpiry,
   CardCvc,
   PostalCode,
+  PaymentRequestButton,
   StripeElement,
   baseStyle,
   get instance() { return Stripe.instance },
