@@ -7,6 +7,7 @@ export const Stripe = {
   redirectToCheckout: null,
   retrievePaymentIntent: null,
   handleCardPayment: null,
+  confirmCardPayment: null,
   handleCardSetup: null,
   handleCardAction: null,
   confirmPaymentIntent: null,
@@ -81,6 +82,7 @@ export function destroy() {
     Stripe.redirectToCheckout = null
     Stripe.retrievePaymentIntent = null
     Stripe.handleCardPayment = null
+    Stripe.confirmCardPayment = null
     Stripe.handleCardSetup = null
     Stripe.handleCardAction = null
     Stripe.confirmPaymentIntent = null
