@@ -64,7 +64,16 @@ export function create(elementType, key_or_stripe, options = {}) {
     Stripe.redirectToCheckout = (options) => Stripe.instance.redirectToCheckout(options)
     Stripe.retrievePaymentIntent = (clientSecret) => Stripe.instance.retrievePaymentIntent(clientSecret)
     Stripe.handleCardPayment = (clientSecret, data) => Stripe.instance.handleCardPayment(clientSecret, element, data)
-    Stripe.confirmCardPayment = (clientSecret, data, options) => Stripe.instance.confirmCardPayment(clientSecret, { payment_method: { card: element } }, options)
+    Stripe.confirmCardPayment = (clientSecret, data, options) => {
+      const newData = {...data}
+      if (!newData.payment_method) {
+        newData.payment_method = {}
+      }
+      newData.payment_method.card = element
+      console.log(newData)
+
+      return Stripe.instance.confirmCardPayment(clientSecret, newData, options)
+    }
     Stripe.handleCardSetup = (clientSecret, data) => Stripe.instance.handleCardSetup(clientSecret, element, data)
     Stripe.confirmCardSetup = (clientSecret, data, options) => Stripe.instance.confirmCardSetup(clientSecret, { payment_method: { card: element } }, options)
     Stripe.handleCardAction = (clientSecret) => Stripe.instance.handleCardAction(clientSecret)
