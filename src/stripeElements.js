@@ -56,20 +56,22 @@ export function create(elementType, key_or_stripe, options = {}) {
 
   const element = Stripe.elements.create(elementType, options)
 
-  Stripe.createToken = (tokenData) => Stripe.instance.createToken(element, tokenData)
-  Stripe.createSource = (sourceData) => Stripe.instance.createSource(element, sourceData)
-  Stripe.retrieveSource = (source) => Stripe.instance.retrieveSource(source)
-  Stripe.paymentRequest = (options) => Stripe.instance.paymentRequest(options)
-  Stripe.redirectToCheckout = (options) => Stripe.instance.redirectToCheckout(options)
-  Stripe.retrievePaymentIntent = (clientSecret) => Stripe.instance.retrievePaymentIntent(clientSecret)
-  Stripe.handleCardPayment = (clientSecret, data) => Stripe.instance.handleCardPayment(clientSecret, element, data)
-  Stripe.confirmCardPayment = (clientSecret, data, options) => Stripe.instance.confirmCardPayment(clientSecret, { paymentMethod: { card: element } }, options)
-  Stripe.handleCardSetup = (clientSecret, data) => Stripe.instance.handleCardSetup(clientSecret, element, data)
-  Stripe.confirmCardSetup = (clientSecret, data, options) => Stripe.instance.confirmCardSetup(clientSecret, { paymentMethod: { card: element } }, options)
-  Stripe.handleCardAction = (clientSecret) => Stripe.instance.handleCardAction(clientSecret)
-  Stripe.confirmPaymentIntent = (clientSecret, data) => Stripe.instance.confirmPaymentIntent(clientSecret, element, data)
-  Stripe.createPaymentMethod = (cardType, data) => Stripe.instance.createPaymentMethod(cardType, element, data)
-  
+  if (elementType == 'cardNumber' || elementType == 'card') {
+    Stripe.createToken = (tokenData) => Stripe.instance.createToken(element, tokenData)
+    Stripe.createSource = (sourceData) => Stripe.instance.createSource(element, sourceData)
+    Stripe.retrieveSource = (source) => Stripe.instance.retrieveSource(source)
+    Stripe.paymentRequest = (options) => Stripe.instance.paymentRequest(options)
+    Stripe.redirectToCheckout = (options) => Stripe.instance.redirectToCheckout(options)
+    Stripe.retrievePaymentIntent = (clientSecret) => Stripe.instance.retrievePaymentIntent(clientSecret)
+    Stripe.handleCardPayment = (clientSecret, data) => Stripe.instance.handleCardPayment(clientSecret, element, data)
+    Stripe.confirmCardPayment = (clientSecret, data, options) => Stripe.instance.confirmCardPayment(clientSecret, { paymentMethod: { card: element } }, options)
+    Stripe.handleCardSetup = (clientSecret, data) => Stripe.instance.handleCardSetup(clientSecret, element, data)
+    Stripe.confirmCardSetup = (clientSecret, data, options) => Stripe.instance.confirmCardSetup(clientSecret, { paymentMethod: { card: element } }, options)
+    Stripe.handleCardAction = (clientSecret) => Stripe.instance.handleCardAction(clientSecret)
+    Stripe.confirmPaymentIntent = (clientSecret, data) => Stripe.instance.confirmPaymentIntent(clientSecret, element, data)
+    Stripe.createPaymentMethod = (cardType, data) => Stripe.instance.createPaymentMethod(cardType, element, data)
+  }
+
   return element
 }
 
